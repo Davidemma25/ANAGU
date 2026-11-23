@@ -1,0 +1,2 @@
+ALTER TABLE land_listings
+ADD COLUMN IF NOT EXISTS price_usd NUMERIC(18, 2);

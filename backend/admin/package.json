@@ -1,0 +1,11 @@
+{
+  "name": "anagu-admin",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Standalone Admin Console frontend and backend for ANAGU Land Administration.",
+  "scripts": {
+    "start": "tsx src/server.js",
+    "dev": "tsx src/server.js"
+  }
+}

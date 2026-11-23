@@ -1,0 +1,12 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+database/.local-anagu-store.json
+# Document uploads live in backend/uploads/ — ignore contents but keep the folder
+backend/uploads/*
+!backend/uploads/.gitkeep

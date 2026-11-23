@@ -1,0 +1,26 @@
+# Optional local workstation helper for running PostgreSQL+PostGIS and Eclipse Mosquitto.
+# Not required inside AI Studio's sandboxed preview container.
+services:
+  postgis:
+    image: postgis/postgis:16-3.4
+    container_name: anagu-postgis
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: anagu_db
+      POSTGRES_USER: anagu_app
+      POSTGRES_PASSWORD: anagu_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - anagu_pgdata:/var/lib/postgresql/data
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: anagu-mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+
+volumes:
+  anagu_pgdata:

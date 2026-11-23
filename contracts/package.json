@@ -1,0 +1,9 @@
+{
+  "name": "anagu-contracts",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test"
+  }
+}

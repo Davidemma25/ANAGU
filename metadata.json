@@ -1,0 +1,6 @@
+{
+  "name": "ANAGU Land Administration",
+  "description": "Academic prototype for integrated GIS, PostGIS, Blockchain ERC-721 NFT land titles, Community Ownership Verification, and MQTT notifications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

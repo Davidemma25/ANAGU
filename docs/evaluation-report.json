@@ -1,0 +1,114 @@
+{
+  "generatedAt": "2026-11-13T18:03:12.229Z",
+  "allScenariosPassed": true,
+  "scenarios": [
+    {
+      "id": "SCENARIO_1_FORGED_DOCUMENT",
+      "title": "Scenario 1: Forged / Tampered Document Detection",
+      "passed": true,
+      "outcome": "DETECTED (TAMPERED_DOCUMENT)",
+      "httpStatus": 200,
+      "latencyMs": 51.04,
+      "evidence": "Oracle flagged 1 conflict(s) on tampered deed."
+    },
+    {
+      "id": "SCENARIO_2_OVERLAPPING_PARCEL",
+      "title": "Scenario 2: Overlapping Parcel Boundary Rejection",
+      "passed": true,
+      "outcome": "REJECTED (HTTP 422 · OVERLAP)",
+      "httpStatus": 422,
+      "latencyMs": 17.04,
+      "evidence": "GIS detected overlap (1 conflicting parcel(s))."
+    },
+    {
+      "id": "SCENARIO_3_COLLUDING_OFFICER",
+      "title": "Scenario 3: Colluding Community Officer Override Block",
+      "passed": true,
+      "outcome": "BLOCKED (HTTP 409 · ORACLE_CONFLICT_OVERRIDE_BLOCKED)",
+      "httpStatus": 409,
+      "latencyMs": 19.22,
+      "evidence": "Blocked attempt to override disputed archive INST-2024-003 and logged audit event."
+    },
+    {
+      "id": "SCENARIO_4_REVOKED_TITLE_REUSE",
+      "title": "Scenario 4: Revoked Title Transfer & Market Reuse Prevention",
+      "passed": true,
+      "outcome": "BLOCKED (TitleIsRevoked + HTTP 409)",
+      "httpStatus": 409,
+      "latencyMs": 1616.64,
+      "evidence": "Revoked tx 0xa5edb310982d... blocked transfer (TitleIsRevoked(1)) & marketplace listing."
+    }
+  ],
+  "benchmarks": {
+    "trials": 5,
+    "environment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "evmEngine": "Hardhat In-Process EVM (Cancun)",
+      "mqttEngine": "Aedes Embedded TCP Broker + MQTT.js (QoS 1)"
+    },
+    "subsystems": [
+      {
+        "id": "GIS_SPATIAL_CHECK",
+        "label": "GIS Geometry & Overlap Check",
+        "trials": 5,
+        "minMs": 0.53,
+        "meanMs": 0.72,
+        "maxMs": 1.02,
+        "avgGasUsed": null
+      },
+      {
+        "id": "COMMUNITY_ORACLE",
+        "label": "Community Ownership Oracle Cross-Check",
+        "trials": 5,
+        "minMs": 0.29,
+        "meanMs": 0.45,
+        "maxMs": 0.89,
+        "avgGasUsed": null
+      },
+      {
+        "id": "BLOCKCHAIN_MINT",
+        "label": "ERC-721 Title Minting (Polygon EVM)",
+        "trials": 5,
+        "minMs": 26.12,
+        "meanMs": 143.32,
+        "maxMs": 579.74,
+        "avgGasUsed": 481411
+      },
+      {
+        "id": "POLYGON_ESCROW_CYCLE",
+        "label": "Polygon Marketplace Escrow (List+Buy+Settle)",
+        "trials": 5,
+        "minMs": 66.99,
+        "meanMs": 76.66,
+        "maxMs": 83.74,
+        "avgGasUsed": 395961
+      },
+      {
+        "id": "GOVERNOR_REVOKE",
+        "label": "Governor Statutory Revocation On-Chain",
+        "trials": 5,
+        "minMs": 19.13,
+        "meanMs": 20.53,
+        "maxMs": 22.65,
+        "avgGasUsed": 149949
+      },
+      {
+        "id": "MQTT_QOS1_PUBSUB",
+        "label": "MQTT QoS 1 Publish + Subscriber Receipt",
+        "trials": 5,
+        "minMs": 2.75,
+        "meanMs": 3.59,
+        "maxMs": 5.47,
+        "avgGasUsed": null
+      }
+    ],
+    "storage": {
+      "prototypeStoreBytes": 22038,
+      "totalRecordsStored": 30,
+      "avgBytesPerRecord": 735,
+      "sampleTitleMetadataBytes": 91
+    }
+  }
+}

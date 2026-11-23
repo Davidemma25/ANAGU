@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/index.ts": {
+      "excludeFiles": "node_modules/{hardhat,@nomicfoundation,solc}/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/favicon.ico", "destination": "/favicon.svg" },
+    { "source": "/api/(.*)", "destination": "/api/index.ts" },
+    { "source": "/((?!assets/|favicon\\.svg).*)", "destination": "/index.html" }
+  ]
+}
